@@ -15,6 +15,7 @@ ENV PATH=$CONDA_DIR/bin:$PATH
 RUN add-apt-repository ppa:sumo/stable && \
     apt update && \
     apt install -y sumo sumo-tools sumo-doc
+ENV SUMO_HOME=/usr/share/sumo
 
 # Create Python Environment
 COPY requirements.txt ./
