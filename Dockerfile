@@ -2,6 +2,7 @@ FROM nvidia/cuda:11.0.3-base-ubuntu20.04
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && \
     apt install -y build-essential && \
+    apt install -y git && \
     apt install -y wget && \
     apt install -y software-properties-common
 
@@ -16,9 +17,11 @@ RUN add-apt-repository ppa:sumo/stable && \
     apt update && \
     apt install -y sumo sumo-tools sumo-doc
 ENV SUMO_HOME=/usr/share/sumo
+ENV LIBSUMO_AS_TRACI=1
 
 # Create Python Environment
 COPY requirements.txt ./
 RUN conda create -y -n sumo-rl python=3.8
 SHELL ["conda", "run", "-n", "sumo-rl", "/bin/bash", "-c"]
 RUN pip install -r requirements.txt
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "my_environment", "/bin/bash"]
