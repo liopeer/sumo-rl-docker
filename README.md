@@ -32,5 +32,9 @@ add the following flags to above commands
  - `--entrypoint="jupyter lab --no-browser --ip=0.0.0.0"`
 open a browser and go to `localhost:8888`
 
+## Using GUIs
+ - should work with some X11 forwarding when using a Linux host
+ - really difficult when working with Mac host. Starting point -> [https://gist.github.com/paul-krohn/e45f96181b1cf5e536325d1bdee6c949](https://gist.github.com/paul-krohn/e45f96181b1cf5e536325d1bdee6c949)
+
 ## Contributing
 Please open issues and pull requests, helps make it more stable.
