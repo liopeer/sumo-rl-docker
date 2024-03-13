@@ -24,4 +24,4 @@ COPY requirements.txt ./
 RUN conda create -y -n sumo-rl python=3.8
 SHELL ["conda", "run", "-n", "sumo-rl", "/bin/bash", "-c"]
 RUN pip install -r requirements.txt
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "my_environment", "/bin/bash"]
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "sumo-rl", "/bin/bash"]
