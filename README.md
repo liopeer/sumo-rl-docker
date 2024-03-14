@@ -8,6 +8,11 @@
 Host machine with installed:
 1. Running installation of Docker [Docker Desktop](https://docs.docker.com/desktop/)
 2. Nvidia Container Toolkit if Nvidia GPUs are available on the host [Nvidia Container Toolki](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+    - Ubuntu instructions are outdated as of (March 2024), modify them according to:
+        1. Configure the production repository as indicated in step 1
+        2. Comment all lines in `/etc/apt/sources.list.d/nvidia-container-toolkit.list` and add the following line instead: `deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://nvidia.github.io/libnvidia-container/stable/ubuntu18.04/$(ARCH) /`
+        3. Follow the rest of the instructions.
+    - Problem is described in [Issue 89](https://github.com/NVIDIA/nvidia-container-toolkit/issues/89)
 3. [Rosetta2](https://support.apple.com/en-in/102527) if you are working on ARM/M1 macOS, most likely you have it already
 Compatibility of the image was tested with:
 1. macOS with ARM (M1) architecture
