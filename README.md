@@ -1,3 +1,4 @@
+![Push to Docker Hub](https://github.com/liopeer/sumo-rl-docker/actions/workflows/build_push_dockerhub.yml/badge.svg)
 # sumo-rl-docker
  - [Sumo](https://eclipse.dev/sumo/), [sumo-rl](https://eclipse.dev/sumo/) with RLlib and StableBaselines3 in a dockerized format for development and cluster deployment
  - the backend is provided by PyTorch
@@ -16,25 +17,31 @@ Compatibility of the image was tested with:
  - `docker pull lionelpeer/sumo-rl:latest`
 
 ## Starting an interactive Container
+ - `-it` flag starts an interactive session
+ - `--rm` flag cleans up, after you exit the container and I recommend using it
+ - `-v $(pwd):/usr/src/` if you want your current (host) directory to be accessible in the container's `/usr/src/` (you can of course also use a different mounting point)
+
 macOS (ARM/M1)
- - `docker run -it --platform=linux/amd64 lionelpeer/sumo-rl:latest`
+ - `docker run -it --rm -v $(pwd):/usr/src/ --platform=linux/amd64 lionelpeer/sumo-rl`
 
 Linux (x86/x64) without GPUs
- - `docker run -it lionelpeer/sumo-rl:latest`
+ - `docker run -it --rm -v $(pwd):/usr/src/ lionelpeer/sumo-rl`
 
 Linux (x86/x64), giving access to GPUs 2 and 3, e.g. when having 4 GPUs (0,1,2,3)
- - `docker run -it --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES="2,3" lionelpeer/sumo-rl:latest`
+ - `docker run -it --rm -v $(pwd):/usr/src/ --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES="2,3" lionelpeer/sumo-rl`
 
 **In all cases:**
-`RLlib` struggles with the container size, so in all above cases it might be helpful to use the following flag
+`RLlib` struggles with the container size, so if you want to use `RLlib`, set the additional flag
  - `--shm-size=10.24gb`
 
 ## Using a Jupyter server in the Container
-add the following flags to above commands
+Run an interactive session like above, but add the following flag:
  - `-p 8888:8888`
- - `--entrypoint="jupyter lab --no-browser --ip=0.0.0.0"`
 
-open a browser and go to `localhost:8888`
+ In the container shell run:
+ - `jupyter lab --no-browser --ip=0.0.0.0 --allow-root`
+
+open a browser and go to `localhost:8888/<ACCESS_TOKEN>`. the access token will be exposed in the shell.
 
 ## Using GUIs
  - should work with some X11 forwarding when using a Linux host
