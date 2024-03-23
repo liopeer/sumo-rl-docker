@@ -123,3 +123,4 @@ urllib3==2.2.1
 Werkzeug==3.0.1
 zipp==3.17.0
 jupyterlab==4.1.4
+gputil==1.4.0
