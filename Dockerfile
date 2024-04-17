@@ -23,5 +23,5 @@ ENV LIBSUMO_AS_TRACI=1
 COPY requirements.txt ./
 RUN conda create -y -n sumo-rl python=3.8
 SHELL ["conda", "run", "-n", "sumo-rl", "/bin/bash", "-c"]
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt -f https://data.pyg.org/whl/torch-2.2.1+cu121.html
 ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "sumo-rl", "/bin/bash"]
